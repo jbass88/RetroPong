@@ -11,8 +11,14 @@ config_version=5
 [application]
 
 config/name="RetroPong"
+run/main_scene="uid://b4h2j0u8a4acx"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GlobalData="*res://scripts/data/global_data.gd"
+Functions="*res://scripts/helpers/functions.gd"
 
 [rendering]
 
