@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://bjy76qd77cgav"]
+
+[ext_resource type="Script" uid="uid://6jde6mujbfc6" path="res://scenes/game/main_level_scene.gd" id="1_71pvm"]
+[ext_resource type="PackedScene" uid="uid://b6lv3o2vov61a" path="res://scenes/game/paddle_left.tscn" id="2_l4h7t"]
+[ext_resource type="Texture2D" uid="uid://b3po5blp4eu1i" path="res://images/dash_rotate.png" id="2_vv3nk"]
+[ext_resource type="PackedScene" uid="uid://b5xna4ksq5ihf" path="res://scenes/game/paddle_right.tscn" id="3_vv3nk"]
+[ext_resource type="PackedScene" uid="uid://bidmpanxjmgol" path="res://scenes/game/ball.tscn" id="4_lkekv"]
+
+[sub_resource type="Gradient" id="Gradient_j2gj4"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8ek21"]
+gradient = SubResource("Gradient_j2gj4")
+
+[node name="MainLevelScene" type="Node2D"]
+script = ExtResource("1_71pvm")
+
+[node name="BackgroundControl" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="TextureRect" type="TextureRect" parent="BackgroundControl"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_8ek21")
+
+[node name="HudLayer" type="CanvasLayer" parent="."]
+
+[node name="LeftScoreLabel" type="Label" parent="HudLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="RightScoreLabel" type="Label" parent="HudLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="BorderTop" type="ColorRect" parent="HudLayer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 5.0
+grow_horizontal = 2
+
+[node name="BorderBottom" type="ColorRect" parent="HudLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="BorderLeft" type="ColorRect" parent="HudLayer"]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 5.0
+grow_vertical = 2
+
+[node name="BorderRight" type="ColorRect" parent="HudLayer"]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="CenterLine" type="Line2D" parent="HudLayer"]
+texture_repeat = 2
+position = Vector2(640, 0)
+points = PackedVector2Array(0, 0, 0, 720)
+width = 5.0
+texture = ExtResource("2_vv3nk")
+texture_mode = 1
+
+[node name="PaddleLeft" parent="." instance=ExtResource("2_l4h7t")]
+position = Vector2(25, 360)
+
+[node name="PaddleRight" parent="." instance=ExtResource("3_vv3nk")]
+position = Vector2(1255, 360)
+
+[node name="Ball" parent="." instance=ExtResource("4_lkekv")]
+position = Vector2(640, 359)

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6lv3o2vov61a"]
+
+[ext_resource type="Script" uid="uid://b4rumx0dg872y" path="res://scenes/game/paddle_left.gd" id="1_koeej"]
+[ext_resource type="Texture2D" uid="uid://b6b71hcdl0vd" path="res://images/paddle.png" id="2_p85ux"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p85ux"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_p85ux")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_krdkh"]
+size = Vector2(20, 200)
+
+[node name="PaddleLeft" type="CharacterBody2D"]
+script = ExtResource("1_koeej")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_p85ux")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_krdkh")

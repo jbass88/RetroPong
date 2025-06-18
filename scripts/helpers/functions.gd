@@ -11,6 +11,13 @@ func add_child_scene(target: String) -> void:
 	
 	show_loading_scene()
 	ResourceLoader.load_threaded_request(_scene_path)
+	
+func change_scene(target: String) -> void:
+	_scene_path = target
+	_scene_type = GlobalData.SceneType.CHANGE_SCENE
+	
+	show_loading_scene()
+	ResourceLoader.load_threaded_request(_scene_path)
 
 func hide_loading_scene() -> void:
 	_loading_scene.loading_process.disconnect(loading_process)
@@ -57,6 +64,9 @@ func next_scene_loaded() -> void:
 			current_scene.add_child(new_node)
 			get_tree().current_scene = new_node
 			_child_scene = new_node
+			
+		GlobalData.SceneType.CHANGE_SCENE:
+			get_tree().change_scene_to_file(_scene_path)
 		
 		GlobalData.SceneType.LOAD_MAIN_MENU:
 			get_tree().change_scene_to_file(GlobalData.MAIN_MENU_PATH)
