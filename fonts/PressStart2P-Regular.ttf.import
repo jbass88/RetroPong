@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bgfnal5rn07qn"
-path="res://.godot/imported/DroidSans.ttf-f4f3e617929333a8a3b131725141d728.fontdata"
+uid="uid://c3h6cwhfap6a"
+path="res://.godot/imported/PressStart2P-Regular.ttf-c7d83f2c4bd295d4c960a93a703ae2b2.fontdata"
 
 [deps]
 
-source_file="res://fonts/DroidSans.ttf"
-dest_files=["res://.godot/imported/DroidSans.ttf-f4f3e617929333a8a3b131725141d728.fontdata"]
+source_file="res://fonts/PressStart2P-Regular.ttf"
+dest_files=["res://.godot/imported/PressStart2P-Regular.ttf-c7d83f2c4bd295d4c960a93a703ae2b2.fontdata"]
 
 [params]
 

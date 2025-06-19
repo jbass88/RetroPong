@@ -17,7 +17,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ie7n5"]
 size = Vector2(20, 200)
 
-[node name="PaddleRight" type="CharacterBody2D"]
+[node name="PaddleRight" type="CharacterBody2D" groups=["paddles"]]
 script = ExtResource("1_gecrc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

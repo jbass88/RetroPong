@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bjy76qd77cgav"]
+[gd_scene load_steps=11 format=3 uid="uid://bjy76qd77cgav"]
 
 [ext_resource type="Script" uid="uid://6jde6mujbfc6" path="res://scenes/game/main_level_scene.gd" id="1_71pvm"]
 [ext_resource type="PackedScene" uid="uid://b6lv3o2vov61a" path="res://scenes/game/paddle_left.tscn" id="2_l4h7t"]
+[ext_resource type="FontFile" uid="uid://c3h6cwhfap6a" path="res://fonts/PressStart2P-Regular.ttf" id="2_lkekv"]
 [ext_resource type="Texture2D" uid="uid://b3po5blp4eu1i" path="res://images/dash_rotate.png" id="2_vv3nk"]
 [ext_resource type="PackedScene" uid="uid://b5xna4ksq5ihf" path="res://scenes/game/paddle_right.tscn" id="3_vv3nk"]
 [ext_resource type="PackedScene" uid="uid://bidmpanxjmgol" path="res://scenes/game/ball.tscn" id="4_lkekv"]
@@ -11,6 +12,12 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_8ek21"]
 gradient = SubResource("Gradient_j2gj4")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lkekv"]
+size = Vector2(1270, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j2gj4"]
+size = Vector2(5, 710)
 
 [node name="MainLevelScene" type="Node2D"]
 script = ExtResource("1_71pvm")
@@ -27,14 +34,6 @@ grow_vertical = 2
 texture = SubResource("GradientTexture1D_8ek21")
 
 [node name="HudLayer" type="CanvasLayer" parent="."]
-
-[node name="LeftScoreLabel" type="Label" parent="HudLayer"]
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="RightScoreLabel" type="Label" parent="HudLayer"]
-offset_right = 40.0
-offset_bottom = 23.0
 
 [node name="BorderTop" type="ColorRect" parent="HudLayer"]
 anchors_preset = 10
@@ -74,6 +73,55 @@ width = 5.0
 texture = ExtResource("2_vv3nk")
 texture_mode = 1
 
+[node name="ScoreLeftLabel" type="Label" parent="HudLayer"]
+offset_left = -10.0
+offset_top = 10.0
+offset_right = 630.0
+offset_bottom = 60.0
+theme_override_fonts/font = ExtResource("2_lkekv")
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 2
+
+[node name="ScoreRightLabel" type="Label" parent="HudLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -625.0
+offset_top = 10.0
+offset_right = 15.0
+offset_bottom = 60.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("2_lkekv")
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="BorderTopBody" type="StaticBody2D" parent="HudLayer"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HudLayer/BorderTopBody"]
+position = Vector2(640, 2.5)
+shape = SubResource("RectangleShape2D_lkekv")
+
+[node name="BorderBottomBody" type="StaticBody2D" parent="HudLayer"]
+position = Vector2(0, 725)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HudLayer/BorderBottomBody"]
+position = Vector2(640, -7.5)
+shape = SubResource("RectangleShape2D_lkekv")
+
+[node name="GoalLeftArea" type="Area2D" parent="HudLayer"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HudLayer/GoalLeftArea"]
+position = Vector2(2.5, 360)
+shape = SubResource("RectangleShape2D_j2gj4")
+
+[node name="GoalRightArea" type="Area2D" parent="HudLayer"]
+position = Vector2(1275, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HudLayer/GoalRightArea"]
+position = Vector2(2.5, 360)
+shape = SubResource("RectangleShape2D_j2gj4")
+
 [node name="PaddleLeft" parent="." instance=ExtResource("2_l4h7t")]
 position = Vector2(25, 360)
 
@@ -82,3 +130,6 @@ position = Vector2(1255, 360)
 
 [node name="Ball" parent="." instance=ExtResource("4_lkekv")]
 position = Vector2(640, 359)
+
+[connection signal="body_entered" from="HudLayer/GoalLeftArea" to="." method="_on_goal_left_area_body_entered"]
+[connection signal="body_entered" from="HudLayer/GoalRightArea" to="." method="_on_goal_right_area_body_entered"]

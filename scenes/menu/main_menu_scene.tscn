@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b4h2j0u8a4acx"]
 
 [ext_resource type="Script" uid="uid://bh3d4hq1elp40" path="res://scenes/menu/main_menu_scene.gd" id="1_8vsfv"]
-[ext_resource type="FontFile" uid="uid://bgfnal5rn07qn" path="res://fonts/DroidSans.ttf" id="2_cp53f"]
+[ext_resource type="FontFile" uid="uid://c3h6cwhfap6a" path="res://fonts/PressStart2P-Regular.ttf" id="2_cp53f"]
 
 [sub_resource type="Gradient" id="Gradient_logje"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)

@@ -17,7 +17,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_krdkh"]
 size = Vector2(20, 200)
 
-[node name="PaddleLeft" type="CharacterBody2D"]
+[node name="PaddleLeft" type="CharacterBody2D" groups=["paddles"]]
 script = ExtResource("1_koeej")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
