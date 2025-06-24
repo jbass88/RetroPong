@@ -54,7 +54,7 @@ layout_mode = 2
 size_flags_vertical = 6
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(250, 50)
+custom_minimum_size = Vector2(300, 75)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -63,7 +63,7 @@ theme_override_font_sizes/font_size = 25
 text = "Start"
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(250, 50)
+custom_minimum_size = Vector2(300, 75)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -72,7 +72,7 @@ theme_override_font_sizes/font_size = 25
 text = "Settings"
 
 [node name="ExitButton" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(250, 50)
+custom_minimum_size = Vector2(300, 75)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

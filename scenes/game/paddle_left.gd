@@ -5,10 +5,17 @@ extends CharacterBody2D
 func _process(delta):
 	var move := 0.0
 
-	if Input.is_action_pressed("paddle_left_up"):
-		move -= 1
-	if Input.is_action_pressed("paddle_left_down"):
-		move += 1
+	if GlobalData.PaddleControlLeft == GlobalData.PaddleControlType.PLAYER_1:
+		if Input.is_action_pressed("paddle_left_up"):
+			move -= 1
+		if Input.is_action_pressed("paddle_left_down"):
+			move += 1
+	elif GlobalData.PaddleControlLeft == GlobalData.PaddleControlType.PLAYER_2:
+		if Input.is_action_pressed("paddle_right_up"):
+			move -= 1
+		if Input.is_action_pressed("paddle_right_down"):
+			move += 1
+	
 
 	# Move the paddle vertically
 	#velocity.y += move * speed * delta

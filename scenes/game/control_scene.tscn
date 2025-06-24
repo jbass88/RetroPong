@@ -1,0 +1,178 @@
+[gd_scene load_steps=7 format=3 uid="uid://cxv0jxf0ovdn4"]
+
+[ext_resource type="FontFile" uid="uid://c3h6cwhfap6a" path="res://fonts/PressStart2P-Regular.ttf" id="1_8jnrd"]
+[ext_resource type="Script" uid="uid://b6x4c0qx4xidt" path="res://scenes/game/control_scene.gd" id="1_jneuy"]
+[ext_resource type="ButtonGroup" uid="uid://b34c3hawukt2x" path="res://scenes/game/button_group_left.tres" id="3_7pams"]
+[ext_resource type="ButtonGroup" uid="uid://cxe5deegp2ome" path="res://scenes/game/button_group_right.tres" id="4_gogdq"]
+
+[sub_resource type="Gradient" id="Gradient_r4d6s"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8jnrd"]
+gradient = SubResource("Gradient_r4d6s")
+
+[node name="ControlScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jneuy")
+button_group_left = ExtResource("3_7pams")
+button_group_right = ExtResource("4_gogdq")
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="TextureRect" type="TextureRect" parent="BackgroundLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_8jnrd")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="LabelInstructions" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8jnrd")
+theme_override_font_sizes/font_size = 35
+text = "Select Player (1/2) 
+or AI (Easy, Medium, or Hard) 
+for both left and right side."
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 200
+theme_override_constants/v_separation = 5
+columns = 2
+
+[node name="LabelLeftSide" type="Label" parent="CenterContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8jnrd")
+theme_override_font_sizes/font_size = 25
+text = "Left side:"
+
+[node name="LabelRightSide" type="Label" parent="CenterContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8jnrd")
+theme_override_font_sizes/font_size = 25
+text = "Right side:"
+
+[node name="LabelLeftSpacing" type="Label" parent="CenterContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="LabelRightSpacing" type="Label" parent="CenterContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="CheckButtonLeftPlayer1" type="CheckButton" parent="CenterContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8jnrd")
+theme_override_font_sizes/font_size = 20
+button_group = ExtResource("3_7pams")
+text = "Player 1"
+expand_icon = true
+
+[node name="CheckButtonRightPlayer1" type="CheckButton" parent="CenterContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8jnrd")
+theme_override_font_sizes/font_size = 20
+button_group = ExtResource("4_gogdq")
+text = "Player 1"
+
+[node name="CheckButtonLeftPlayer2" type="CheckButton" parent="CenterContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8jnrd")
+theme_override_font_sizes/font_size = 20
+button_group = ExtResource("3_7pams")
+text = "Player 2"
+
+[node name="CheckButtonRightPlayer2" type="CheckButton" parent="CenterContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8jnrd")
+theme_override_font_sizes/font_size = 20
+button_group = ExtResource("4_gogdq")
+text = "Player 2"
+
+[node name="CheckButtonLeftAiEasy" type="CheckButton" parent="CenterContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8jnrd")
+theme_override_font_sizes/font_size = 20
+button_group = ExtResource("3_7pams")
+text = "AI Easy"
+
+[node name="CheckButtonRightAiEasy" type="CheckButton" parent="CenterContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8jnrd")
+theme_override_font_sizes/font_size = 20
+button_group = ExtResource("4_gogdq")
+text = "AI Easy"
+
+[node name="CheckButtonLeftAiMedium" type="CheckButton" parent="CenterContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8jnrd")
+theme_override_font_sizes/font_size = 20
+button_group = ExtResource("3_7pams")
+text = "AI Medium"
+
+[node name="CheckButtonRightAiMedium" type="CheckButton" parent="CenterContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8jnrd")
+theme_override_font_sizes/font_size = 20
+button_group = ExtResource("4_gogdq")
+text = "AI Medium"
+
+[node name="CheckButtonLeftAiHard" type="CheckButton" parent="CenterContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8jnrd")
+theme_override_font_sizes/font_size = 20
+button_group = ExtResource("3_7pams")
+text = "AI Hard"
+
+[node name="CheckButtonRightAiHard" type="CheckButton" parent="CenterContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8jnrd")
+theme_override_font_sizes/font_size = 20
+button_group = ExtResource("4_gogdq")
+text = "AI Hard"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="ButtonCancel" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8jnrd")
+theme_override_font_sizes/font_size = 25
+text = "Cancel"
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ButtonStart" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_8jnrd")
+theme_override_font_sizes/font_size = 25
+text = "Start"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/ButtonCancel" to="." method="_on_button_cancel_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/ButtonStart" to="." method="_on_button_start_pressed"]

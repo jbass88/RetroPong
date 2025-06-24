@@ -18,7 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalData="*res://scripts/data/global_data.gd"
-Functions="*res://scripts/helpers/functions.gd"
+SceneManager="*res://scripts/helpers/scene_manager.gd"
+StringManager="*res://scripts/helpers/string_manager.gd"
 
 [display]
 

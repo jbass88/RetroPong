@@ -3,11 +3,13 @@ extends CharacterBody2D
 # Export variables to tweak from the Inspector
 @export var base_speed: float = 400.0
 @export var speed_increase: float = 25.0
+# Controls how steep the bounce angle can be. 1.0 is a 45-degree angle.
+# A higher value allows for steeper bounces.
+@export var bounce_angle_factor: float = 1.2 
 
 # This variable will hold the current speed and direction
 var current_speed: float
 
-# This function will be called from the main game to start a round
 func start():
 	# Reset position to the center of the ball's parent (the main scene)
 	position = get_parent().get_viewport_rect().size / 2
@@ -17,26 +19,39 @@ func start():
 
 	# Choose a random starting direction
 	var direction_x = 1 if randi_range(0, 1) == 0 else -1
-	var direction_y = randf_range(-0.8, 0.8) # Add a slight vertical angle
-
-	# Normalize the vector to ensure consistent speed, then apply speed
+	var direction_y = randf_range(-0.8, 0.8)
+	
 	velocity = Vector2(direction_x, direction_y).normalized() * current_speed
 
-# _physics_process is the heart of the movement
 func _physics_process(delta: float):
-	# move_and_collide moves the body and stops on collision,
-	# returning a KinematicCollision2D object with collision data.
 	var collision = move_and_collide(velocity * delta)
 
-	# If a collision occurred...
 	if collision:
-		# The bounce() function is perfect for this. It reflects the velocity
-		# vector based on the collision's normal (the direction of the surface).
-		velocity = velocity.bounce(collision.get_normal())
+		var collider = collision.get_collider()
 		
-		# Check if the object we hit was a paddle
-		# We'll add the paddles to a "paddles" group in the next step
-		if collision.get_collider().is_in_group("paddles"):
-			# Increase the speed and apply it to the velocity
+		if collider.is_in_group("paddles"):
+			# 1. Get the paddle and its height. This assumes the paddle's root node
+			# has a CollisionShape2D child.
+			var paddle = collider
+			var paddle_height = paddle.get_node("CollisionShape2D").shape.get_rect().size.y
+			
+			# 2. Calculate the offset from the paddle's center.
+			# A positive value means the ball hit the bottom half.
+			# A negative value means the ball hit the top half.
+			var offset_y = self.global_position.y - paddle.global_position.y
+			
+			# 3. Normalize the offset to a range of -1.0 to 1.0 (or close to it)
+			# This represents the new vertical direction.
+			var new_y_dir = (offset_y / (paddle_height / 2.0)) * bounce_angle_factor
+			
+			# 4. Create the new direction vector.
+			# -sign(velocity.x) inverts the horizontal direction.
+			var new_direction = Vector2(-sign(velocity.x), new_y_dir)
+			
+			# 5. Increase the speed and apply it to the new, normalized direction
 			current_speed += speed_increase
-			velocity = velocity.normalized() * current_speed
+			velocity = new_direction.normalized() * current_speed
+		else:
+			velocity = velocity.bounce(collision.get_normal())
+		
+		

@@ -1,0 +1,138 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxpicr0qu4c0b"]
+
+[ext_resource type="Script" uid="uid://c2qoc3no6ycpq" path="res://scenes/game/end_round_scene.gd" id="1_c6hl7"]
+[ext_resource type="FontFile" uid="uid://c3h6cwhfap6a" path="res://fonts/PressStart2P-Regular.ttf" id="1_s2l87"]
+
+[sub_resource type="Gradient" id="Gradient_c6hl7"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xm73y"]
+gradient = SubResource("Gradient_c6hl7")
+
+[node name="EndRoundScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c6hl7")
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="TextureRect" type="TextureRect" parent="BackgroundLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_xm73y")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_bottom = 50
+
+[node name="LabelHeaderResult" type="Label" parent="VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_s2l87")
+theme_override_font_sizes/font_size = 75
+text = "You Win!"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/CenterContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 200
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="LabelScoreLeft" type="Label" parent="VBoxContainer/CenterContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_s2l87")
+theme_override_font_sizes/font_size = 20
+text = "Left Score"
+
+[node name="LabelScoreRight" type="Label" parent="VBoxContainer/CenterContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_s2l87")
+theme_override_font_sizes/font_size = 20
+text = "Right Score"
+
+[node name="LabelScoreLeftValue" type="Label" parent="VBoxContainer/CenterContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_s2l87")
+theme_override_font_sizes/font_size = 20
+text = "0"
+horizontal_alignment = 1
+
+[node name="LabelScoreRightValue" type="Label" parent="VBoxContainer/CenterContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_s2l87")
+theme_override_font_sizes/font_size = 20
+text = "0"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 5
+
+[node name="ButtonRestartKeep" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_s2l87")
+theme_override_font_sizes/font_size = 20
+text = "Restart (Keep Controls)"
+
+[node name="ButtonRestartChange" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_s2l87")
+theme_override_font_sizes/font_size = 20
+text = "Restart (Change Controls)"
+
+[node name="ButtonCredits" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_s2l87")
+theme_override_font_sizes/font_size = 20
+text = "Credits"
+
+[node name="ButtonMainMenu" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_s2l87")
+theme_override_font_sizes/font_size = 20
+text = "Main Menu"
+
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/ButtonRestartKeep" to="." method="_on_button_restart_keep_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/ButtonRestartChange" to="." method="_on_button_restart_change_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/ButtonCredits" to="." method="_on_button_credits_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/ButtonMainMenu" to="." method="_on_button_main_menu_pressed"]
