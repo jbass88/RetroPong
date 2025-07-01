@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GlobalData="*res://scripts/data/global_data.gd"
 SceneManager="*res://scripts/helpers/scene_manager.gd"
 StringManager="*res://scripts/helpers/string_manager.gd"
+SoundManager="*res://scripts/helpers/sound_manager.tscn"
 
 [display]
 

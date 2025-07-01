@@ -1,13 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4h2j0u8a4acx"]
+[gd_scene load_steps=8 format=3 uid="uid://b4h2j0u8a4acx"]
 
 [ext_resource type="Script" uid="uid://bh3d4hq1elp40" path="res://scenes/menu/main_menu_scene.gd" id="1_8vsfv"]
 [ext_resource type="FontFile" uid="uid://c3h6cwhfap6a" path="res://fonts/PressStart2P-Regular.ttf" id="2_cp53f"]
+[ext_resource type="Texture2D" uid="uid://b3cyxax3bqxho" path="res://images/speaker.png" id="3_logje"]
 
 [sub_resource type="Gradient" id="Gradient_logje"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ahk0m"]
 gradient = SubResource("Gradient_logje")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_logje"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_ahk0m"]
+Button/styles/normal = SubResource("StyleBoxFlat_logje")
 
 [node name="MainMenuScene" type="Control"]
 layout_mode = 3
@@ -36,6 +43,24 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+
+[node name="MuteButton" type="Button" parent="VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(175, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+theme = SubResource("Theme_ahk0m")
+theme_override_fonts/font = ExtResource("2_cp53f")
+theme_override_font_sizes/font_size = 22
+text = "Music"
+icon = ExtResource("3_logje")
+alignment = 2
+icon_alignment = 2
+expand_icon = true
 
 [node name="TitleTopLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -84,6 +109,7 @@ text = "Exit"
 layout_mode = 2
 size_flags_vertical = 6
 
+[connection signal="pressed" from="VBoxContainer/MarginContainer/MuteButton" to="." method="_on_mute_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

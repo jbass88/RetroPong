@@ -1,20 +1,17 @@
 extends CharacterBody2D
 
-# Export variables to tweak from the Inspector
 @export var base_speed: float = 400.0
 @export var speed_increase: float = 25.0
 # Controls how steep the bounce angle can be. 1.0 is a 45-degree angle.
 # A higher value allows for steeper bounces.
 @export var bounce_angle_factor: float = 1.2 
 
-# This variable will hold the current speed and direction
 var current_speed: float
 
 func start():
 	# Reset position to the center of the ball's parent (the main scene)
 	position = get_parent().get_viewport_rect().size / 2
 	
-	# Reset speed
 	current_speed = base_speed
 
 	# Choose a random starting direction
@@ -51,7 +48,12 @@ func _physics_process(delta: float):
 			# 5. Increase the speed and apply it to the new, normalized direction
 			current_speed += speed_increase
 			velocity = new_direction.normalized() * current_speed
+			
+			if (offset_y >= -50 && offset_y <= 50):
+				SoundManager.play_random_bounce(SoundManager.bounce_sounds_med.pick_random())
+			else:
+				SoundManager.play_random_bounce(SoundManager.bounce_sounds_high.pick_random())
 		else:
 			velocity = velocity.bounce(collision.get_normal())
-		
+			SoundManager.play_random_bounce(SoundManager.bounce_sounds_low.pick_random())
 		

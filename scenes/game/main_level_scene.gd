@@ -4,6 +4,10 @@ const SCORE_LIMIT : int = 11
 
 @onready var score_left_label: Label = $HudLayer/ScoreLeftLabel
 @onready var score_right_label: Label = $HudLayer/ScoreRightLabel
+@onready var ball: CharacterBody2D = $Ball
+@onready var paddle_left: CharacterBody2D = $PaddleLeft
+@onready var paddle_right: CharacterBody2D = $PaddleRight
+
 
 var score_left = 0
 var score_right = 0
@@ -13,6 +17,7 @@ func _ready():
 	GlobalData.PaddleScoreLeft = score_left
 	GlobalData.PaddleScoreRight = score_right
 	
+	update_difficulty()
 	start_round()
 	
 func end_round():
@@ -33,7 +38,9 @@ func _on_goal_left_area_body_entered(body):
 		score_right += 1
 		update_score_display()
 		
-		var score_difference = score_left - score_right		
+		SoundManager.play_sfx(SoundManager.PLAYER_SCORE)
+		
+		var score_difference = score_left - score_right
 		if (score_right >= SCORE_LIMIT || score_left >= SCORE_LIMIT) && (score_difference <= -2 || score_difference >= 2):
 			end_round()
 		else:
@@ -44,7 +51,9 @@ func _on_goal_right_area_body_entered(body):
 		score_left += 1
 		update_score_display()
 		
-		var score_difference = score_left - score_right		
+		SoundManager.play_sfx(SoundManager.AI_SCORE)
+		
+		var score_difference = score_left - score_right
 		if (score_right >= SCORE_LIMIT || score_left >= SCORE_LIMIT) && (score_difference <= -2 || score_difference >= 2):
 			end_round()
 		else:

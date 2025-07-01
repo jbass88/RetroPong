@@ -1,8 +1,6 @@
 extends Node
 
 func format_paddle_control_type(input: GlobalData.PaddleControlType):
-	var result = ""
-	
 	# PaddleControlType {NONE, PLAYER_1, PLAYER_2, AI_EASY, AI_MEDIUM, AI_HARD}
 	if input == GlobalData.PaddleControlType.NONE:
 		return "None"

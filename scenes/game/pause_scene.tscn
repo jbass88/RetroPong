@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bg2vymxli2q2b"]
+
+[ext_resource type="Script" uid="uid://b5wx5x2un8d6o" path="res://scenes/game/pause_scene.gd" id="1_ttl3i"]
+
+[node name="PauseScene" type="CanvasLayer"]
+script = ExtResource("1_ttl3i")

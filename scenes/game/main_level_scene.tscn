@@ -122,11 +122,13 @@ position = Vector2(1275, 0)
 position = Vector2(2.5, 360)
 shape = SubResource("RectangleShape2D_j2gj4")
 
-[node name="PaddleLeft" parent="." instance=ExtResource("2_l4h7t")]
+[node name="PaddleLeft" parent="." node_paths=PackedStringArray("ball") instance=ExtResource("2_l4h7t")]
 position = Vector2(25, 360)
+ball = NodePath("../Ball")
 
-[node name="PaddleRight" parent="." instance=ExtResource("3_vv3nk")]
+[node name="PaddleRight" parent="." node_paths=PackedStringArray("ball") instance=ExtResource("3_vv3nk")]
 position = Vector2(1255, 360)
+ball = NodePath("../Ball")
 
 [node name="Ball" parent="." instance=ExtResource("4_lkekv")]
 position = Vector2(640, 359)
