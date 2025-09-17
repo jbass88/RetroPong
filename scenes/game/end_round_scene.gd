@@ -20,9 +20,6 @@ func _ready():
 func _on_button_restart_keep_pressed() -> void:
 	SceneManager.change_scene("res://scenes/game/main_level_scene.tscn")
 
-func _on_button_restart_change_pressed() -> void:
-	SceneManager.change_scene("res://scenes/game/control_scene.tscn")
-
 func _on_button_credits_pressed() -> void:
 	SceneManager.change_scene("res://scenes/game/credits_scene.tscn")
 

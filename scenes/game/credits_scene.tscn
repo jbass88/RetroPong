@@ -1,0 +1,172 @@
+[gd_scene load_steps=5 format=3 uid="uid://3dew3glj8vxi"]
+
+[ext_resource type="FontFile" uid="uid://c3h6cwhfap6a" path="res://fonts/PressStart2P-Regular.ttf" id="1_jr8ta"]
+[ext_resource type="Script" uid="uid://n01ihvvpoh47" path="res://scenes/game/credits_scene.gd" id="1_wk2j7"]
+
+[sub_resource type="Gradient" id="Gradient_p0mlq"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jr8ta"]
+gradient = SubResource("Gradient_p0mlq")
+
+[node name="CreditsScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wk2j7")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_jr8ta")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 620.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_jr8ta")
+theme_override_font_sizes/font_size = 50
+text = "Retro Pong"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="TitleLabel2" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_jr8ta")
+theme_override_font_sizes/font_size = 25
+text = "by Jonathan Bass (BassTech)"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 2
+
+[node name="TitleLabel4" type="Label" parent="ScrollContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_jr8ta")
+theme_override_font_sizes/font_size = 20
+text = "Game Engine:"
+horizontal_alignment = 2
+
+[node name="LinkButton2" type="LinkButton" parent="ScrollContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_jr8ta")
+theme_override_font_sizes/font_size = 20
+text = "Godot"
+underline = 1
+uri = "https://godotengine.org/license/"
+
+[node name="TitleLabel5" type="Label" parent="ScrollContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_jr8ta")
+theme_override_font_sizes/font_size = 20
+text = "Font:"
+horizontal_alignment = 2
+
+[node name="LinkButton" type="LinkButton" parent="ScrollContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_jr8ta")
+theme_override_font_sizes/font_size = 20
+text = "Press Start 2P"
+underline = 1
+uri = "https://fonts.google.com/specimen/Press+Start+2P"
+
+[node name="TitleLabel6" type="Label" parent="ScrollContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_jr8ta")
+theme_override_font_sizes/font_size = 20
+text = "Icon:"
+horizontal_alignment = 2
+
+[node name="LinkButton3" type="LinkButton" parent="ScrollContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_jr8ta")
+theme_override_font_sizes/font_size = 20
+text = "Speaker"
+underline = 1
+uri = "https://game-icons.net/1x1/delapouite/speaker.html"
+
+[node name="TitleLabel7" type="Label" parent="ScrollContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_jr8ta")
+theme_override_font_sizes/font_size = 20
+text = "Sounds:"
+horizontal_alignment = 2
+
+[node name="LinkButton4" type="LinkButton" parent="ScrollContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_jr8ta")
+theme_override_font_sizes/font_size = 20
+text = "Ball sound"
+underline = 1
+uri = "https://freesound.org/people/el_boss/sounds/628636/?"
+
+[node name="TitleLabel8" type="Label" parent="ScrollContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_jr8ta")
+theme_override_font_sizes/font_size = 20
+text = "Music:"
+horizontal_alignment = 2
+
+[node name="LinkButton5" type="LinkButton" parent="ScrollContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_jr8ta")
+theme_override_font_sizes/font_size = 20
+text = "Pixabay"
+underline = 1
+uri = "https://pixabay.com/service/license-summary/"
+
+[node name="BackButton" type="Button" parent="."]
+custom_minimum_size = Vector2(300, 75)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -75.0
+offset_right = 300.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_jr8ta")
+theme_override_font_sizes/font_size = 25
+text = "Back"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

@@ -94,5 +94,5 @@ func unmute_all():
 	update_volume()
 
 func update_volume():
-	music_player.volume_db = -80 if is_muted else music_volume_db
-	sfx_player.volume_db = -80 if is_muted else sfx_volume_db
+	music_player.volume_db = -80.0 if is_muted else music_volume_db
+	sfx_player.volume_db = -80.0 if is_muted else sfx_volume_db

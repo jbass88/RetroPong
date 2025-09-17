@@ -1,7 +1,7 @@
 extends Node
 
-var _child_scene : Node
 var _loading_scene : Node
+var _previous_scenes = []
 var _scene_path : String
 var _scene_type : GlobalData.SceneType
 
@@ -10,7 +10,7 @@ func add_child_scene(target: String) -> void:
 	_scene_type = GlobalData.SceneType.ADD_CHILD_SCENE
 	
 	show_loading_scene()
-	ResourceLoader.load_threaded_request(_scene_path)
+	next_scene_loaded()
 	
 func change_scene(target: String) -> void:
 	_scene_path = target
@@ -57,13 +57,15 @@ func next_scene_loaded() -> void:
 	match _scene_type:
 		GlobalData.SceneType.ADD_CHILD_SCENE:
 			# New scene
-			var new_scene = ResourceLoader.load_threaded_get(_scene_path)
-			var new_node = new_scene.instantiate()
+			var new_scene = load(_scene_path).instantiate()
 			
 			var current_scene = get_tree().current_scene
-			current_scene.add_child(new_node)
-			get_tree().current_scene = new_node
-			_child_scene = new_node
+			var parent_scene = current_scene.get_parent()
+			if (parent_scene):
+				parent_scene.remove_child(current_scene)
+				parent_scene.add_child(new_scene)
+				get_tree().current_scene = new_scene
+				_previous_scenes.append(current_scene)
 			
 		GlobalData.SceneType.CHANGE_SCENE:
 			get_tree().change_scene_to_file(_scene_path)
@@ -73,8 +75,23 @@ func next_scene_loaded() -> void:
 			
 		GlobalData.SceneType.REMOVE_CHILD_SCENE:
 			var current_scene = get_tree().current_scene
-			current_scene.remove_child(_child_scene)
-			_child_scene.queue_free()
+			var parent_scene = current_scene.get_parent()
+			if (parent_scene != null):
+				parent_scene.remove_child(current_scene)
+				current_scene.queue_free()
+				var previous_scene = _previous_scenes.pop_back()
+				if (previous_scene != null):
+					parent_scene.add_child(previous_scene)
+					get_tree().current_scene = previous_scene
+				else:
+					load_main_menu()
+			else:
+				load_main_menu()
+			
+func remove_child_scene() -> void:
+	_scene_type = GlobalData.SceneType.REMOVE_CHILD_SCENE
+	show_loading_scene()
+	next_scene_loaded()
 
 func show_loading_scene() -> void:
 	_loading_scene = preload(GlobalData.LOADING_SCREEN_PATH).instantiate()

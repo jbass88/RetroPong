@@ -13,10 +13,7 @@ func _on_start_button_pressed() -> void:
 	SceneManager.change_scene("res://scenes/game/control_scene.tscn")
 
 func _on_settings_button_pressed() -> void:
-	SceneManager.show_error_message("Feature not implemented yet.")
-
-func _on_exit_button_pressed() -> void:
-	get_tree().quit(0)
+	SceneManager.add_child_scene("res://scenes/game/settings_scene.tscn")
 
 func _on_mute_button_pressed() -> void:
 	SoundManager.toggle_mute()
@@ -24,3 +21,6 @@ func _on_mute_button_pressed() -> void:
 		mute_button.icon = SPEAKER_OFF
 	else:
 		mute_button.icon = SPEAKER
+
+func _on_credits_button_pressed() -> void:
+	SceneManager.change_scene("res://scenes/game/credits_scene.tscn")

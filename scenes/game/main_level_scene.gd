@@ -17,8 +17,12 @@ func _ready():
 	GlobalData.PaddleScoreLeft = score_left
 	GlobalData.PaddleScoreRight = score_right
 	
-	update_difficulty()
 	start_round()
+	
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause_menu"):
+		get_tree().paused = true
+		SceneManager.add_child_scene("res://scenes/game/pause_scene.tscn")
 	
 func end_round():
 	GlobalData.PaddleScoreLeft = score_left
@@ -38,7 +42,11 @@ func _on_goal_left_area_body_entered(body):
 		score_right += 1
 		update_score_display()
 		
-		SoundManager.play_sfx(SoundManager.PLAYER_SCORE)
+		if (GlobalData.PaddleControlRight == GlobalData.PaddleControlType.PLAYER_1 ||
+			GlobalData.PaddleControlRight == GlobalData.PaddleControlType.PLAYER_2):
+			SoundManager.play_sfx(SoundManager.PLAYER_SCORE)
+		else:
+			SoundManager.play_sfx(SoundManager.AI_SCORE)
 		
 		var score_difference = score_left - score_right
 		if (score_right >= SCORE_LIMIT || score_left >= SCORE_LIMIT) && (score_difference <= -2 || score_difference >= 2):
@@ -51,7 +59,11 @@ func _on_goal_right_area_body_entered(body):
 		score_left += 1
 		update_score_display()
 		
-		SoundManager.play_sfx(SoundManager.AI_SCORE)
+		if (GlobalData.PaddleControlLeft == GlobalData.PaddleControlType.PLAYER_1 ||
+			GlobalData.PaddleControlLeft == GlobalData.PaddleControlType.PLAYER_2):
+			SoundManager.play_sfx(SoundManager.PLAYER_SCORE)
+		else:
+			SoundManager.play_sfx(SoundManager.AI_SCORE)
 		
 		var score_difference = score_left - score_right
 		if (score_right >= SCORE_LIMIT || score_left >= SCORE_LIMIT) && (score_difference <= -2 || score_difference >= 2):

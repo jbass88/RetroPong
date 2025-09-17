@@ -56,7 +56,7 @@ size_flags_horizontal = 8
 theme = SubResource("Theme_ahk0m")
 theme_override_fonts/font = ExtResource("2_cp53f")
 theme_override_font_sizes/font_size = 22
-text = "Music"
+text = "Sound"
 icon = ExtResource("3_logje")
 alignment = 2
 icon_alignment = 2
@@ -64,11 +64,9 @@ expand_icon = true
 
 [node name="TitleTopLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 6
 
 [node name="TitleLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 6
 theme_override_fonts/font = ExtResource("2_cp53f")
 theme_override_font_sizes/font_size = 50
 text = "Retro Pong"
@@ -76,7 +74,7 @@ horizontal_alignment = 1
 
 [node name="TitleBottomLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 3
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(300, 75)
@@ -96,20 +94,20 @@ theme_override_fonts/font = ExtResource("2_cp53f")
 theme_override_font_sizes/font_size = 25
 text = "Settings"
 
-[node name="ExitButton" type="Button" parent="VBoxContainer"]
+[node name="CreditsButton" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(300, 75)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("2_cp53f")
 theme_override_font_sizes/font_size = 25
-text = "Exit"
+text = "Credits"
 
 [node name="BottomSpacingLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 3
 
 [connection signal="pressed" from="VBoxContainer/MarginContainer/MuteButton" to="." method="_on_mute_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]

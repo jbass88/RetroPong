@@ -1,8 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://dyt0oa3n2l0ns"]
+[gd_scene load_steps=5 format=3 uid="uid://dyt0oa3n2l0ns"]
 
 [ext_resource type="Script" uid="uid://bmql5lcv766a1" path="res://scenes/game/settings_scene.gd" id="1_8y6tn"]
+[ext_resource type="FontFile" uid="uid://c3h6cwhfap6a" path="res://fonts/PressStart2P-Regular.ttf" id="2_ma7k1"]
+
+[sub_resource type="Gradient" id="Gradient_l27i2"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_g5tcn"]
+gradient = SubResource("Gradient_l27i2")
 
 [node name="SettingsScene" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,3 +18,144 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8y6tn")
+
+[node name="BackgroundControl" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="TextureRect" type="TextureRect" parent="BackgroundControl"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_g5tcn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopTitleLabel" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="SettingsLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ma7k1")
+theme_override_font_sizes/font_size = 50
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="BottomTitleLabel" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+columns = 2
+
+[node name="MasterVolumeLabel" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ma7k1")
+text = "Master Volume:"
+
+[node name="MasterVolumeSlider" type="HSlider" parent="VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+max_value = 1.0
+step = 0.001
+ticks_on_borders = true
+
+[node name="MusicVolumeLabel" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ma7k1")
+text = "Music Volume:"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+max_value = 1.0
+step = 0.001
+ticks_on_borders = true
+
+[node name="SfxVolumeLabel" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ma7k1")
+text = "Sfx Volume:"
+
+[node name="SfxVolumeSlider" type="HSlider" parent="VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+max_value = 1.0
+step = 0.001
+ticks_on_borders = true
+
+[node name="Label" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="DisplayModeLabel" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ma7k1")
+text = "Display Mode:"
+
+[node name="DisplayModeOptionButton" type="OptionButton" parent="VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+item_count = 2
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Fullscreen"
+popup/item_1/id = 1
+
+[node name="Label3" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="KeyBindsLabel" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ma7k1")
+text = "Key Binds:"
+
+[node name="KeyBindsButton" type="Button" parent="VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(300, 31)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_ma7k1")
+text = "View Key Binds"
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_ma7k1")
+theme_override_font_sizes/font_size = 25
+text = "Back
+"
+
+[node name="BottomSpacingLabel" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[connection signal="value_changed" from="VBoxContainer/GridContainer/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/GridContainer/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/GridContainer/SfxVolumeSlider" to="." method="_on_sfx_volume_slider_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/GridContainer/DisplayModeOptionButton" to="." method="_on_display_mode_option_button_item_selected"]
+[connection signal="pressed" from="VBoxContainer/GridContainer/KeyBindsButton" to="." method="_on_key_binds_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
