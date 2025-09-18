@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxv0jxf0ovdn4"]
+[gd_scene load_steps=9 format=3 uid="uid://cxv0jxf0ovdn4"]
 
 [ext_resource type="FontFile" uid="uid://c3h6cwhfap6a" path="res://fonts/PressStart2P-Regular.ttf" id="1_8jnrd"]
 [ext_resource type="Script" uid="uid://b6x4c0qx4xidt" path="res://scenes/game/control_scene.gd" id="1_jneuy"]
 [ext_resource type="ButtonGroup" uid="uid://b34c3hawukt2x" path="res://scenes/game/button_group_left.tres" id="3_7pams"]
 [ext_resource type="ButtonGroup" uid="uid://cxe5deegp2ome" path="res://scenes/game/button_group_right.tres" id="4_gogdq"]
+[ext_resource type="Texture2D" uid="uid://b5gyay2q7l77o" path="res://images/player.png" id="5_rcay5"]
+[ext_resource type="Texture2D" uid="uid://dnfbv7a4r0ufq" path="res://images/robot.png" id="6_idbiq"]
 
 [sub_resource type="Gradient" id="Gradient_r4d6s"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -33,20 +35,20 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_8jnrd")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_bottom = 25
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 100
-alignment = 1
 
-[node name="LabelInstructions" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="LabelInstructions" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_8jnrd")
 theme_override_font_sizes/font_size = 35
@@ -55,124 +57,200 @@ or AI (Easy, Medium, or Hard)
 for both left and right side."
 horizontal_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="CenterContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/h_separation = 200
-theme_override_constants/v_separation = 5
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 250
+theme_override_constants/v_separation = 10
 columns = 2
 
-[node name="LabelLeftSide" type="Label" parent="CenterContainer/VBoxContainer/GridContainer"]
+[node name="LabelLeftSide" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_8jnrd")
-theme_override_font_sizes/font_size = 25
-text = "Left side:"
+theme_override_font_sizes/font_size = 30
+text = "Left: "
 
-[node name="LabelRightSide" type="Label" parent="CenterContainer/VBoxContainer/GridContainer"]
+[node name="LabelRightSide" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_8jnrd")
-theme_override_font_sizes/font_size = 25
-text = "Right side:"
+theme_override_font_sizes/font_size = 30
+text = "Right:"
 
-[node name="LabelLeftSpacing" type="Label" parent="CenterContainer/VBoxContainer/GridContainer"]
+[node name="LabelLeftSpacing" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
 
-[node name="LabelRightSpacing" type="Label" parent="CenterContainer/VBoxContainer/GridContainer"]
+[node name="LabelRightSpacing" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
 
-[node name="CheckButtonLeftPlayer1" type="CheckButton" parent="CenterContainer/VBoxContainer/GridContainer"]
+[node name="CheckButtonLeftPlayer1" type="CheckButton" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(300, 40)
 layout_mode = 2
+focus_neighbor_right = NodePath("../CheckButtonRightPlayer1")
+focus_neighbor_bottom = NodePath("../CheckButtonLeftPlayer2")
+focus_next = NodePath("../CheckButtonLeftPlayer2")
 theme_override_fonts/font = ExtResource("1_8jnrd")
 theme_override_font_sizes/font_size = 20
 button_group = ExtResource("3_7pams")
 text = "Player 1"
+icon = ExtResource("5_rcay5")
+icon_alignment = 2
 expand_icon = true
 
-[node name="CheckButtonRightPlayer1" type="CheckButton" parent="CenterContainer/VBoxContainer/GridContainer"]
+[node name="CheckButtonRightPlayer1" type="CheckButton" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
+focus_neighbor_left = NodePath("../CheckButtonLeftPlayer1")
+focus_neighbor_bottom = NodePath("../CheckButtonRightPlayer2")
+focus_next = NodePath("../CheckButtonRightPlayer2")
+focus_previous = NodePath("../CheckButtonLeftAiHard")
 theme_override_fonts/font = ExtResource("1_8jnrd")
 theme_override_font_sizes/font_size = 20
 button_group = ExtResource("4_gogdq")
 text = "Player 1"
+icon = ExtResource("5_rcay5")
+icon_alignment = 2
+expand_icon = true
 
-[node name="CheckButtonLeftPlayer2" type="CheckButton" parent="CenterContainer/VBoxContainer/GridContainer"]
+[node name="CheckButtonLeftPlayer2" type="CheckButton" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
+focus_neighbor_top = NodePath("../CheckButtonLeftPlayer1")
+focus_neighbor_right = NodePath("../CheckButtonRightPlayer2")
+focus_neighbor_bottom = NodePath("../CheckButtonLeftAiEasy")
+focus_next = NodePath("../CheckButtonLeftAiEasy")
+focus_previous = NodePath("../CheckButtonLeftPlayer1")
 theme_override_fonts/font = ExtResource("1_8jnrd")
 theme_override_font_sizes/font_size = 20
 button_group = ExtResource("3_7pams")
 text = "Player 2"
+icon = ExtResource("5_rcay5")
+icon_alignment = 2
+expand_icon = true
 
-[node name="CheckButtonRightPlayer2" type="CheckButton" parent="CenterContainer/VBoxContainer/GridContainer"]
+[node name="CheckButtonRightPlayer2" type="CheckButton" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
+focus_neighbor_left = NodePath("../CheckButtonLeftPlayer2")
+focus_neighbor_top = NodePath("../CheckButtonRightPlayer1")
+focus_neighbor_bottom = NodePath("../CheckButtonRightAiEasy")
+focus_next = NodePath("../CheckButtonRightAiEasy")
+focus_previous = NodePath("../CheckButtonRightPlayer1")
 theme_override_fonts/font = ExtResource("1_8jnrd")
 theme_override_font_sizes/font_size = 20
 button_group = ExtResource("4_gogdq")
 text = "Player 2"
+icon = ExtResource("5_rcay5")
+icon_alignment = 2
+expand_icon = true
 
-[node name="CheckButtonLeftAiEasy" type="CheckButton" parent="CenterContainer/VBoxContainer/GridContainer"]
+[node name="CheckButtonLeftAiEasy" type="CheckButton" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
+focus_neighbor_top = NodePath("../CheckButtonLeftPlayer2")
+focus_neighbor_right = NodePath("../CheckButtonRightAiEasy")
+focus_neighbor_bottom = NodePath("../CheckButtonLeftAiMedium")
+focus_next = NodePath("../CheckButtonLeftAiMedium")
+focus_previous = NodePath("../CheckButtonLeftPlayer2")
 theme_override_fonts/font = ExtResource("1_8jnrd")
 theme_override_font_sizes/font_size = 20
 button_group = ExtResource("3_7pams")
 text = "AI Easy"
+icon = ExtResource("6_idbiq")
+icon_alignment = 2
+expand_icon = true
 
-[node name="CheckButtonRightAiEasy" type="CheckButton" parent="CenterContainer/VBoxContainer/GridContainer"]
+[node name="CheckButtonRightAiEasy" type="CheckButton" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../CheckButtonRightPlayer2")
+focus_neighbor_bottom = NodePath("../CheckButtonRightAiMedium")
+focus_next = NodePath("../CheckButtonRightAiMedium")
+focus_previous = NodePath("../CheckButtonRightPlayer2")
 theme_override_fonts/font = ExtResource("1_8jnrd")
 theme_override_font_sizes/font_size = 20
 button_group = ExtResource("4_gogdq")
 text = "AI Easy"
+icon = ExtResource("6_idbiq")
+icon_alignment = 2
+expand_icon = true
 
-[node name="CheckButtonLeftAiMedium" type="CheckButton" parent="CenterContainer/VBoxContainer/GridContainer"]
+[node name="CheckButtonLeftAiMedium" type="CheckButton" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
+focus_neighbor_top = NodePath("../CheckButtonLeftAiEasy")
+focus_neighbor_right = NodePath("../CheckButtonRightAiMedium")
+focus_neighbor_bottom = NodePath("../CheckButtonLeftAiHard")
+focus_next = NodePath("../CheckButtonLeftAiHard")
+focus_previous = NodePath("../CheckButtonLeftAiEasy")
 theme_override_fonts/font = ExtResource("1_8jnrd")
 theme_override_font_sizes/font_size = 20
 button_group = ExtResource("3_7pams")
 text = "AI Medium"
+icon = ExtResource("6_idbiq")
+icon_alignment = 2
+expand_icon = true
 
-[node name="CheckButtonRightAiMedium" type="CheckButton" parent="CenterContainer/VBoxContainer/GridContainer"]
+[node name="CheckButtonRightAiMedium" type="CheckButton" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
+focus_neighbor_left = NodePath("../CheckButtonLeftAiMedium")
+focus_neighbor_top = NodePath("../CheckButtonRightAiEasy")
+focus_neighbor_bottom = NodePath("../CheckButtonRightAiHard")
+focus_next = NodePath("../CheckButtonRightAiHard")
+focus_previous = NodePath("../CheckButtonRightAiEasy")
 theme_override_fonts/font = ExtResource("1_8jnrd")
 theme_override_font_sizes/font_size = 20
 button_group = ExtResource("4_gogdq")
 text = "AI Medium"
+icon = ExtResource("6_idbiq")
+icon_alignment = 2
+expand_icon = true
 
-[node name="CheckButtonLeftAiHard" type="CheckButton" parent="CenterContainer/VBoxContainer/GridContainer"]
+[node name="CheckButtonLeftAiHard" type="CheckButton" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
+focus_neighbor_top = NodePath("../CheckButtonLeftAiMedium")
+focus_neighbor_right = NodePath("../CheckButtonRightAiHard")
+focus_next = NodePath("../CheckButtonRightPlayer1")
+focus_previous = NodePath("../CheckButtonLeftAiMedium")
 theme_override_fonts/font = ExtResource("1_8jnrd")
 theme_override_font_sizes/font_size = 20
 button_group = ExtResource("3_7pams")
 text = "AI Hard"
+icon = ExtResource("6_idbiq")
+icon_alignment = 2
+expand_icon = true
 
-[node name="CheckButtonRightAiHard" type="CheckButton" parent="CenterContainer/VBoxContainer/GridContainer"]
+[node name="CheckButtonRightAiHard" type="CheckButton" parent="MarginContainer/VBoxContainer/CenterContainer/GridContainer"]
 layout_mode = 2
+focus_neighbor_left = NodePath("../CheckButtonLeftAiHard")
+focus_neighbor_top = NodePath("../CheckButtonRightAiMedium")
+focus_previous = NodePath("../CheckButtonRightAiMedium")
 theme_override_fonts/font = ExtResource("1_8jnrd")
 theme_override_font_sizes/font_size = 20
 button_group = ExtResource("4_gogdq")
 text = "AI Hard"
+icon = ExtResource("6_idbiq")
+icon_alignment = 2
+expand_icon = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-alignment = 2
+alignment = 1
 
-[node name="ButtonCancel" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+[node name="ButtonCancel" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(250, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_8jnrd")
 theme_override_font_sizes/font_size = 25
 text = "Cancel"
 
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="ButtonStart" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+[node name="ButtonStart" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(250, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_8jnrd")
 theme_override_font_sizes/font_size = 25
 text = "Start"
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/ButtonCancel" to="." method="_on_button_cancel_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/ButtonStart" to="." method="_on_button_start_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ButtonCancel" to="." method="_on_button_cancel_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ButtonStart" to="." method="_on_button_start_pressed"]

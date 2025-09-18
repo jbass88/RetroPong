@@ -7,6 +7,7 @@ extends Node
 var music_volume_db := 0.0
 var sfx_volume_db := 0.0
 var is_muted := false
+var first_load := true
 
 const AI_SCORE = preload("res://sounds/score/ai_score.ogg")
 const PLAYER_SCORE = preload("res://sounds/score/player_score.ogg")

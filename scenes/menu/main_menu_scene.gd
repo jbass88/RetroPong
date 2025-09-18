@@ -2,11 +2,18 @@ extends Control
 
 @onready var mute_button: Button = $VBoxContainer/MarginContainer/MuteButton
 
-
 const SPEAKER_OFF = preload("res://images/speaker-off.png")
 const SPEAKER = preload("res://images/speaker.png")
 
 func _ready() -> void:
+	if SoundManager.first_load:
+		SoundManager.first_load = false
+		SoundManager.mute_all()
+		
+	if SoundManager.is_muted:
+		mute_button.icon = SPEAKER_OFF
+	else:
+		mute_button.icon = SPEAKER
 	SoundManager.play_background_music()
 
 func _on_start_button_pressed() -> void:

@@ -118,9 +118,9 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("1_jr8ta")
 theme_override_font_sizes/font_size = 20
-text = "Speaker"
+text = "Game Icons"
 underline = 1
-uri = "https://game-icons.net/1x1/delapouite/speaker.html"
+uri = "https://creativecommons.org/licenses/by/3.0/"
 
 [node name="TitleLabel7" type="Label" parent="ScrollContainer/VBoxContainer/GridContainer"]
 layout_mode = 2

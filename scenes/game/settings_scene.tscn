@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dyt0oa3n2l0ns"]
+[gd_scene load_steps=6 format=3 uid="uid://dyt0oa3n2l0ns"]
 
 [ext_resource type="Script" uid="uid://bmql5lcv766a1" path="res://scenes/game/settings_scene.gd" id="1_8y6tn"]
 [ext_resource type="FontFile" uid="uid://c3h6cwhfap6a" path="res://fonts/PressStart2P-Regular.ttf" id="2_ma7k1"]
+[ext_resource type="Texture2D" uid="uid://b3cyxax3bqxho" path="res://images/speaker.png" id="3_l27i2"]
 
 [sub_resource type="Gradient" id="Gradient_l27i2"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -59,10 +60,27 @@ size_flags_horizontal = 4
 size_flags_vertical = 3
 columns = 2
 
+[node name="MuteLabel" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ma7k1")
+text = "Mute Sound:"
+horizontal_alignment = 2
+
+[node name="MuteButton" type="Button" parent="VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_ma7k1")
+text = "Sound"
+icon = ExtResource("3_l27i2")
+icon_alignment = 2
+expand_icon = true
+
 [node name="MasterVolumeLabel" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ma7k1")
 text = "Master Volume:"
+horizontal_alignment = 2
 
 [node name="MasterVolumeSlider" type="HSlider" parent="VBoxContainer/GridContainer"]
 unique_name_in_owner = true
@@ -77,6 +95,7 @@ ticks_on_borders = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ma7k1")
 text = "Music Volume:"
+horizontal_alignment = 2
 
 [node name="MusicVolumeSlider" type="HSlider" parent="VBoxContainer/GridContainer"]
 unique_name_in_owner = true
@@ -91,6 +110,7 @@ ticks_on_borders = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ma7k1")
 text = "Sfx Volume:"
+horizontal_alignment = 2
 
 [node name="SfxVolumeSlider" type="HSlider" parent="VBoxContainer/GridContainer"]
 unique_name_in_owner = true
@@ -111,11 +131,13 @@ layout_mode = 2
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ma7k1")
 text = "Display Mode:"
+horizontal_alignment = 2
 
 [node name="DisplayModeOptionButton" type="OptionButton" parent="VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ma7k1")
 item_count = 2
 popup/item_0/text = "Windowed"
 popup/item_0/id = 0
@@ -132,6 +154,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ma7k1")
 text = "Key Binds:"
+horizontal_alignment = 2
 
 [node name="KeyBindsButton" type="Button" parent="VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(300, 31)
@@ -153,6 +176,7 @@ text = "Back
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
+[connection signal="pressed" from="VBoxContainer/GridContainer/MuteButton" to="." method="_on_mute_button_pressed"]
 [connection signal="value_changed" from="VBoxContainer/GridContainer/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/GridContainer/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/GridContainer/SfxVolumeSlider" to="." method="_on_sfx_volume_slider_value_changed"]
