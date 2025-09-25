@@ -4,7 +4,13 @@ extends CharacterBody2D
 @export var speed_increase: float = 25.0
 # Controls how steep the bounce angle can be. 1.0 is a 45-degree angle.
 # A higher value allows for steeper bounces.
-@export var bounce_angle_factor: float = 1.2 
+@export var bounce_angle_factor: float = 1.2
+
+@export var radius_px := 10.0
+@export var spin_scale := 0.1
+
+var v: Vector2 = Vector2(500, 0)      # your current ball velocity
+var ang_vel := 0.0
 
 var current_speed: float
 
@@ -57,3 +63,16 @@ func _physics_process(delta: float):
 			velocity = velocity.bounce(collision.get_normal())
 			SoundManager.play_random_bounce(SoundManager.bounce_sounds_low.pick_random())
 		
+		
+	# angular speed ~ linear speed / radius
+	var omega = (velocity.length() / max(1.0, radius_px)) * spin_scale
+	ang_vel = omega * _spin_sign(v)
+	rotation = wrapf(rotation + ang_vel * delta, -PI, PI)
+
+func _spin_sign(dir: Vector2) -> float:
+	# Spin “toward” the shot: right = clockwise, left = counter-clockwise.
+	# If it looks reversed in your project, flip the returned signs.
+	if absf(dir.x) >= absf(dir.y):
+		return 1.0 if dir.x >= 0.0 else -1.0
+	else:
+		return -1.0 if dir.y >= 0.0 else 1.0
